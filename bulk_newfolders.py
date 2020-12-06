@@ -1,4 +1,4 @@
-
+#A Python Code to create folders in bulk in Windows
 
 import os
 
