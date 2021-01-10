@@ -1,3 +1,5 @@
+#Maybe you have to change some things because this script is made for my own Downloads Folder
+
 import os 
 
 image_extensions = ['.png', '.jpg', '.jpeg', '.gif']
