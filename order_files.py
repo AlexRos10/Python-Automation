@@ -4,7 +4,7 @@ import os
 
 image_extensions = ['.png', '.jpg', '.jpeg', '.gif']
 video_extensions = ['.mov', '.mp4', '.m4v']
-audio_extensions = ['.mp3', '.m4a', '.wav']
+audio_extensions = ['.mp3', '.m4a', '.wav', '.ogg']
 
 def order_files(work_area):
     os.chdir(work_area)
@@ -19,6 +19,8 @@ def order_files(work_area):
                 elif extension in image_extensions[::-1]:
                     if not extension == '.png':
                         file_name = file.name[::extens] + '.png'
+                    else:
+                        file_name = file.name
                     path = 'Pictures\\Imagenes\\' + file_name
                 elif extension == '.gif':
                     path = 'Pictures\\Imagenes\\Gifs\\' + file.name
@@ -37,5 +39,3 @@ if __name__ == '__main__':
     order_files(work_area)
     work_area = os.path.join(os.path.expanduser('~'), 'downloads\\MyFlow')
     order_files(work_area)
-
-    
