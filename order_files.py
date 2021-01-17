@@ -19,19 +19,16 @@ def order_files(work_area):
         for file in files:
             if os.path.isfile(file):
                 os.chdir(work_area)
-                extens = file.name.find('.')
-                extension = file.name[extens::]
+                filename, extension = os.path.splitext(file)
                 if extension in doc_extensions:
                     path = f'{docs_folder}\\' + file.name
                 elif not file.name.lower().find('wallpaper') == -1:
-                    file_name = file.name[0:extens] + '.png'
-                    path = f'{wallpaper_folder}\\' + file_name
+                    os.rename(file, filename + '.png')
+                    path = f'{wallpaper_folder}\\' + file.name
                 elif extension in image_extensions[0:-1]:
                     if not extension == '.png':
-                        file_name = file.name[0:extens] + '.png'
-                    else:
-                        file_name = file.name
-                    path = f'{images_folder}\\' + file_name
+                        os.rename(file, filename + '.png')
+                    path = f'{images_folder}\\' + file.name
                 elif extension == '.gif':
                     path = f'{gifs_folder}\\' + file.name
                 elif extension in video_extensions:
@@ -45,13 +42,10 @@ def order_files(work_area):
                 with os.scandir(file) as folder:
                     for archive in folder:
                         if os.path.isfile(archive):
-                            extens = archive.name.find('.')
-                            extension = archive.name[extens::]
+                            filename, extension = os.path.splitext(file)
                             if extension in image_extensions[0:-1]:
                                 if not extension == '.png':
-                                    file_name = archive.name[0:extens] + '.png'
-                                else:
-                                    file_name = archive.name
+                                    os.rename(file, filename + '.png')
                                 
                                 os.rename(archive, file_name)
                             
