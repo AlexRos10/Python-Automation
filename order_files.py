@@ -1,5 +1,6 @@
 #A Simple Python Script to Order your Downloads Folder (Maybe It Could Update in the Future with new Features)
-import os 
+import os
+from zipfile import ZipFile
 
 image_extensions = ['.png', '.jpg', '.jpeg', '.gif']
 video_extensions = ['.mov', '.mp4', '.m4v']
@@ -34,9 +35,16 @@ def order_files(work_area):
                 elif extension in video_extensions:
                     path = f'{videos_folder}\\' + file.name
                 elif extension in audio_extensions:
-                    path = f'{videos_folder}\\' + file.name                   
+                    path = f'{videos_folder}\\' + file.name
+                elif extension == '.zip':
+                    with ZipFile(file.name, 'r') as zipFolder:
+                        zipFolder.extractall(os.path.join(os.path.expanduser('~'), 'Desktop'))
+                    
+                    os.remove(file.name)
+                    continue               
 
                 os.rename(file, os.path.join(os.path.expanduser('~'), path))
+                
             elif os.path.isdir(file):
                 os.chdir(file)
                 with os.scandir(file) as folder:
